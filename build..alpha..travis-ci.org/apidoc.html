@@ -1,0 +1,205 @@
+<div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a
+
+        href="https://github.com/substack/node-wordwrap#readme"
+
+    >wordwrap (v1.0.0)</a>
+</h1>
+<h4>Wrap those words. Show them at what columns to start and stop.</h4>
+<div class="apidocSectionDiv"><a
+    href="#apidoc.tableOfContents"
+    id="apidoc.tableOfContents"
+><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.wordwrap">module wordwrap</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.wordwrap.hard">
+            function <span class="apidocSignatureSpan">wordwrap.</span>hard
+            <span class="apidocSignatureSpan">(start, stop)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.wordwrap.soft">
+            function <span class="apidocSignatureSpan">wordwrap.</span>soft
+            <span class="apidocSignatureSpan">(start, stop, params)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.wordwrap" id="apidoc.module.wordwrap">module wordwrap</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.wordwrap.hard" id="apidoc.element.wordwrap.hard">
+        function <span class="apidocSignatureSpan">wordwrap.</span>hard
+        <span class="apidocSignatureSpan">(start, stop)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">hard = function (start, stop) {
+    return wordwrap(start, stop, { mode : &#x27;hard&#x27; });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+Pad out lines with spaces out to column `start` and then wrap until column
+`stop`. If a word is longer than `stop - start` characters it will overflow.
+
+In &#x22;soft&#x22; mode, split chunks by `/(\S+\s+/` and don&#x27;t break up chunks which are
+longer than `stop - start`, in &#x22;hard&#x22; mode, split chunks with `/\b/` and break
+up chunks longer than `stop - start`.
+
+wrap.<span class="apidocCodeKeywordSpan">hard</span>(start, stop)
+----------------------
+
+Like `wrap()` but with `params.mode = &#x22;hard&#x22;`.
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.wordwrap.soft" id="apidoc.element.wordwrap.soft">
+        function <span class="apidocSignatureSpan">wordwrap.</span>soft
+        <span class="apidocSignatureSpan">(start, stop, params)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">soft = function (start, stop, params) {
+    if (typeof start === &#x27;object&#x27;) {
+        params = start;
+        start = params.start;
+        stop = params.stop;
+    }
+
+    if (typeof stop === &#x27;object&#x27;) {
+        params = stop;
+        start = start || params.start;
+        stop = undefined;
+    }
+
+    if (!stop) {
+        stop = start;
+        start = 0;
+    }
+
+    if (!params) params = {};
+    var mode = params.mode || &#x27;soft&#x27;;
+    var re = mode === &#x27;hard&#x27; ? /\b/ : /(\S+\s+)/;
+
+    return function (text) {
+        var chunks = text.toString()
+            .split(re)
+            .reduce(function (acc, x) {
+                if (mode === &#x27;hard&#x27;) {
+                    for (var i = 0; i &#x3c; x.length; i += stop - start) {
+                        acc.push(x.slice(i, i + stop - start));
+                    }
+                }
+                else acc.push(x)
+                return acc;
+            }, [])
+        ;
+
+        return chunks.reduce(function (lines, rawChunk) {
+            if (rawChunk === &#x27;&#x27;) return lines;
+
+            var chunk = rawChunk.replace(/\t/g, &#x27;    &#x27;);
+
+            var i = lines.length - 1;
+            if (lines[i].length + chunk.length &#x3e; stop) {
+                lines[i] = lines[i].replace(/\s+$/, &#x27;&#x27;);
+
+                chunk.split(/\n/).forEach(function (c) {
+                    lines.push(
+                        new Array(start + 1).join(&#x27; &#x27;)
+                        + c.replace(/^\s+/, &#x27;&#x27;)
+                    );
+                });
+            }
+            else if (chunk.match(/\n/)) {
+                var xs = chunk.split(/\n/);
+                lines[i] += xs.shift();
+                xs.forEach(function (c) {
+                    lines.push(
+                        new Array(start + 1).join(&#x27; &#x27;)
+                        + c.replace(/^\s+/, &#x27;&#x27;)
+                    );
+                });
+            }
+            else {
+                lines[i] += chunk;
+            }
+
+            return lines;
+        }, [ new Array(start + 1).join(&#x27; &#x27;) ]).join(&#x27;\n&#x27;);
+    };
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
