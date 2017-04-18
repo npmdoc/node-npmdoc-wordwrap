@@ -1,4 +1,4 @@
-<div class="apidocDiv">
+<html><head></head><body><div class="apidocDiv">
 <style>
 /*csslint
 */
@@ -47,17 +47,10 @@
 }
 </style>
 <h1>api documentation for
-    <a
-
-        href="https://github.com/substack/node-wordwrap#readme"
-
-    >wordwrap (v1.0.0)</a>
+    <a href="https://github.com/substack/node-wordwrap#readme">wordwrap (v1.0.0)</a>
 </h1>
 <h4>Wrap those words. Show them at what columns to start and stop.</h4>
-<div class="apidocSectionDiv"><a
-    href="#apidoc.tableOfContents"
-    id="apidoc.tableOfContents"
-><h1>table of contents</h1></a><ol>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
 
     <li class="apidocModuleLi"><a href="#apidoc.module.wordwrap">module wordwrap</a><ol>
 
@@ -126,13 +119,13 @@
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">wordwrap = function (start, stop, params) {
-    if (typeof start === &#x27;object&#x27;) {
+    if (typeof start === 'object') {
         params = start;
         start = params.start;
         stop = params.stop;
     }
 
-    if (typeof stop === &#x27;object&#x27;) {
+    if (typeof stop === 'object') {
         params = stop;
         start = start || params.start;
         stop = undefined;
@@ -144,15 +137,15 @@
     }
 
     if (!params) params = {};
-    var mode = params.mode || &#x27;soft&#x27;;
-    var re = mode === &#x27;hard&#x27; ? /\b/ : /(\S+\s+)/;
+    var mode = params.mode || 'soft';
+    var re = mode === 'hard' ? /\b/ : /(\S+\s+)/;
 
     return function (text) {
         var chunks = text.toString()
             .split(re)
             .reduce(function (acc, x) {
-                if (mode === &#x27;hard&#x27;) {
-                    for (var i = 0; i &#x3c; x.length; i += stop - start) {
+                if (mode === 'hard') {
+                    for (var i = 0; i &lt; x.length; i += stop - start) {
                         acc.push(x.slice(i, i + stop - start));
                     }
                 }
@@ -162,18 +155,18 @@
         ;
 
         return chunks.reduce(function (lines, rawChunk) {
-            if (rawChunk === &#x27;&#x27;) return lines;
+            if (rawChunk === '') return lines;
 
-            var chunk = rawChunk.replace(/\t/g, &#x27;    &#x27;);
+            var chunk = rawChunk.replace(/\t/g, '    ');
 
             var i = lines.length - 1;
-            if (lines[i].length + chunk.length &#x3e; stop) {
-                lines[i] = lines[i].replace(/\s+$/, &#x27;&#x27;);
+            if (lines[i].length + chunk.length &gt; stop) {
+                lines[i] = lines[i].replace(/\s+$/, '');
 
                 chunk.split(/\n/).forEach(function (c) {
                     lines.push(
-                        new Array(start + 1).join(&#x27; &#x27;)
-                        + c.replace(/^\s+/, &#x27;&#x27;)
+                        new Array(start + 1).join(' ')
+                        + c.replace(/^\s+/, '')
                     );
                 });
             }
@@ -182,8 +175,8 @@
                 lines[i] += xs.shift();
                 xs.forEach(function (c) {
                     lines.push(
-                        new Array(start + 1).join(&#x27; &#x27;)
-                        + c.replace(/^\s+/, &#x27;&#x27;)
+                        new Array(start + 1).join(' ')
+                        + c.replace(/^\s+/, '')
                     );
                 });
             }
@@ -192,7 +185,7 @@
             }
 
             return lines;
-        }, [ new Array(start + 1).join(&#x27; &#x27;) ]).join(&#x27;\n&#x27;);
+        }, [ new Array(start + 1).join(' ') ]).join('\n');
     };
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
@@ -208,20 +201,20 @@
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">hard = function (start, stop) {
-    return wordwrap(start, stop, { mode : &#x27;hard&#x27; });
+    return wordwrap(start, stop, { mode : 'hard' });
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 Pad out lines with spaces out to column `start` and then wrap until column
 `stop`. If a word is longer than `stop - start` characters it will overflow.
 
-In &#x22;soft&#x22; mode, split chunks by `/(\S+\s+/` and don&#x27;t break up chunks which are
-longer than `stop - start`, in &#x22;hard&#x22; mode, split chunks with `/\b/` and break
+In "soft" mode, split chunks by `/(\S+\s+/` and don't break up chunks which are
+longer than `stop - start`, in "hard" mode, split chunks with `/\b/` and break
 up chunks longer than `stop - start`.
 
 wrap.<span class="apidocCodeKeywordSpan">hard</span>(start, stop)
 ----------------------
 
-Like `wrap()` but with `params.mode = &#x22;hard&#x22;`.
+Like `wrap()` but with `params.mode = "hard"`.
 ...</pre></li>
     </ul>
 
@@ -235,13 +228,13 @@ Like `wrap()` but with `params.mode = &#x22;hard&#x22;`.
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">soft = function (start, stop, params) {
-    if (typeof start === &#x27;object&#x27;) {
+    if (typeof start === 'object') {
         params = start;
         start = params.start;
         stop = params.stop;
     }
 
-    if (typeof stop === &#x27;object&#x27;) {
+    if (typeof stop === 'object') {
         params = stop;
         start = start || params.start;
         stop = undefined;
@@ -253,15 +246,15 @@ Like `wrap()` but with `params.mode = &#x22;hard&#x22;`.
     }
 
     if (!params) params = {};
-    var mode = params.mode || &#x27;soft&#x27;;
-    var re = mode === &#x27;hard&#x27; ? /\b/ : /(\S+\s+)/;
+    var mode = params.mode || 'soft';
+    var re = mode === 'hard' ? /\b/ : /(\S+\s+)/;
 
     return function (text) {
         var chunks = text.toString()
             .split(re)
             .reduce(function (acc, x) {
-                if (mode === &#x27;hard&#x27;) {
-                    for (var i = 0; i &#x3c; x.length; i += stop - start) {
+                if (mode === 'hard') {
+                    for (var i = 0; i &lt; x.length; i += stop - start) {
                         acc.push(x.slice(i, i + stop - start));
                     }
                 }
@@ -271,18 +264,18 @@ Like `wrap()` but with `params.mode = &#x22;hard&#x22;`.
         ;
 
         return chunks.reduce(function (lines, rawChunk) {
-            if (rawChunk === &#x27;&#x27;) return lines;
+            if (rawChunk === '') return lines;
 
-            var chunk = rawChunk.replace(/\t/g, &#x27;    &#x27;);
+            var chunk = rawChunk.replace(/\t/g, '    ');
 
             var i = lines.length - 1;
-            if (lines[i].length + chunk.length &#x3e; stop) {
-                lines[i] = lines[i].replace(/\s+$/, &#x27;&#x27;);
+            if (lines[i].length + chunk.length &gt; stop) {
+                lines[i] = lines[i].replace(/\s+$/, '');
 
                 chunk.split(/\n/).forEach(function (c) {
                     lines.push(
-                        new Array(start + 1).join(&#x27; &#x27;)
-                        + c.replace(/^\s+/, &#x27;&#x27;)
+                        new Array(start + 1).join(' ')
+                        + c.replace(/^\s+/, '')
                     );
                 });
             }
@@ -291,8 +284,8 @@ Like `wrap()` but with `params.mode = &#x22;hard&#x22;`.
                 lines[i] += xs.shift();
                 xs.forEach(function (c) {
                     lines.push(
-                        new Array(start + 1).join(&#x27; &#x27;)
-                        + c.replace(/^\s+/, &#x27;&#x27;)
+                        new Array(start + 1).join(' ')
+                        + c.replace(/^\s+/, '')
                     );
                 });
             }
@@ -301,7 +294,7 @@ Like `wrap()` but with `params.mode = &#x22;hard&#x22;`.
             }
 
             return lines;
-        }, [ new Array(start + 1).join(&#x27; &#x27;) ]).join(&#x27;\n&#x27;);
+        }, [ new Array(start + 1).join(' ') ]).join('\n');
     };
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
@@ -322,13 +315,13 @@ Like `wrap()` but with `params.mode = &#x22;hard&#x22;`.
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">soft = function (start, stop, params) {
-    if (typeof start === &#x27;object&#x27;) {
+    if (typeof start === 'object') {
         params = start;
         start = params.start;
         stop = params.stop;
     }
 
-    if (typeof stop === &#x27;object&#x27;) {
+    if (typeof stop === 'object') {
         params = stop;
         start = start || params.start;
         stop = undefined;
@@ -340,15 +333,15 @@ Like `wrap()` but with `params.mode = &#x22;hard&#x22;`.
     }
 
     if (!params) params = {};
-    var mode = params.mode || &#x27;soft&#x27;;
-    var re = mode === &#x27;hard&#x27; ? /\b/ : /(\S+\s+)/;
+    var mode = params.mode || 'soft';
+    var re = mode === 'hard' ? /\b/ : /(\S+\s+)/;
 
     return function (text) {
         var chunks = text.toString()
             .split(re)
             .reduce(function (acc, x) {
-                if (mode === &#x27;hard&#x27;) {
-                    for (var i = 0; i &#x3c; x.length; i += stop - start) {
+                if (mode === 'hard') {
+                    for (var i = 0; i &lt; x.length; i += stop - start) {
                         acc.push(x.slice(i, i + stop - start));
                     }
                 }
@@ -358,18 +351,18 @@ Like `wrap()` but with `params.mode = &#x22;hard&#x22;`.
         ;
 
         return chunks.reduce(function (lines, rawChunk) {
-            if (rawChunk === &#x27;&#x27;) return lines;
+            if (rawChunk === '') return lines;
 
-            var chunk = rawChunk.replace(/\t/g, &#x27;    &#x27;);
+            var chunk = rawChunk.replace(/\t/g, '    ');
 
             var i = lines.length - 1;
-            if (lines[i].length + chunk.length &#x3e; stop) {
-                lines[i] = lines[i].replace(/\s+$/, &#x27;&#x27;);
+            if (lines[i].length + chunk.length &gt; stop) {
+                lines[i] = lines[i].replace(/\s+$/, '');
 
                 chunk.split(/\n/).forEach(function (c) {
                     lines.push(
-                        new Array(start + 1).join(&#x27; &#x27;)
-                        + c.replace(/^\s+/, &#x27;&#x27;)
+                        new Array(start + 1).join(' ')
+                        + c.replace(/^\s+/, '')
                     );
                 });
             }
@@ -378,8 +371,8 @@ Like `wrap()` but with `params.mode = &#x22;hard&#x22;`.
                 lines[i] += xs.shift();
                 xs.forEach(function (c) {
                     lines.push(
-                        new Array(start + 1).join(&#x27; &#x27;)
-                        + c.replace(/^\s+/, &#x27;&#x27;)
+                        new Array(start + 1).join(' ')
+                        + c.replace(/^\s+/, '')
                     );
                 });
             }
@@ -388,7 +381,7 @@ Like `wrap()` but with `params.mode = &#x22;hard&#x22;`.
             }
 
             return lines;
-        }, [ new Array(start + 1).join(&#x27; &#x27;) ]).join(&#x27;\n&#x27;);
+        }, [ new Array(start + 1).join(' ') ]).join('\n');
     };
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
@@ -404,20 +397,20 @@ Like `wrap()` but with `params.mode = &#x22;hard&#x22;`.
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">hard = function (start, stop) {
-    return wordwrap(start, stop, { mode : &#x27;hard&#x27; });
+    return wordwrap(start, stop, { mode : 'hard' });
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 Pad out lines with spaces out to column `start` and then wrap until column
 `stop`. If a word is longer than `stop - start` characters it will overflow.
 
-In &#x22;soft&#x22; mode, split chunks by `/(\S+\s+/` and don&#x27;t break up chunks which are
-longer than `stop - start`, in &#x22;hard&#x22; mode, split chunks with `/\b/` and break
+In "soft" mode, split chunks by `/(\S+\s+/` and don't break up chunks which are
+longer than `stop - start`, in "hard" mode, split chunks with `/\b/` and break
 up chunks longer than `stop - start`.
 
 wrap.<span class="apidocCodeKeywordSpan">hard</span>(start, stop)
 ----------------------
 
-Like `wrap()` but with `params.mode = &#x22;hard&#x22;`.
+Like `wrap()` but with `params.mode = "hard"`.
 ...</pre></li>
     </ul>
 
@@ -430,3 +423,4 @@ Like `wrap()` but with `params.mode = &#x22;hard&#x22;`.
     ]
 </div>
 </div>
+</body></html>
