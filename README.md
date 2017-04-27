@@ -1,6 +1,6 @@
 # npmdoc-wordwrap
 
-#### api documentation for  [wordwrap (v1.0.0)](https://github.com/substack/node-wordwrap#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-wordwrap.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-wordwrap) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-wordwrap.svg)](https://travis-ci.org/npmdoc/node-npmdoc-wordwrap)
+#### basic api documentation for  [wordwrap (v1.0.0)](https://github.com/substack/node-wordwrap#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-wordwrap.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-wordwrap) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-wordwrap.svg)](https://travis-ci.org/npmdoc/node-npmdoc-wordwrap)
 
 #### Wrap those words. Show them at what columns to start and stop.
 
@@ -67,7 +67,8 @@
     "scripts": {
         "test": "expresso"
     },
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "bin": {}
 }
 ```
 
